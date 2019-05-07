@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
 type Props = {
   source: {
     uri?: string,
-    base64?: string
+    base64?: string,
+    headers: object
   },
   style: object
 }
@@ -187,6 +188,7 @@ class PdfReader extends Component<Props, State> {
             originWhitelist={['http://*', 'https://*', 'file://*', 'data:*']}
             style={styles.webview}
             source={{ uri: data }}
+            headers={this.props.source.headers}
           />
         </View>
       )
@@ -202,6 +204,7 @@ class PdfReader extends Component<Props, State> {
             mixedContentMode="always"
             scrollEnabled
             height="100vh"
+            headers={this.props.source.headers}
           />
         </View>
       )
