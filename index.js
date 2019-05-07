@@ -178,7 +178,7 @@ class PdfReader extends Component<Props, State> {
   render() {
     const { ready, data, ios, android } = this.state
     const { style } = this.props
-
+    
     if (data && ios) {
       return (
         <View style={[styles.container, style]}>
@@ -187,8 +187,7 @@ class PdfReader extends Component<Props, State> {
             onLoad={()=>this.setState({ready: true})}
             originWhitelist={['http://*', 'https://*', 'file://*', 'data:*']}
             style={styles.webview}
-            source={{ uri: data }}
-            headers={this.props.source.headers}
+            source={{ uri: data, headers: this.props.source.headers }}
           />
         </View>
       )
@@ -200,11 +199,10 @@ class PdfReader extends Component<Props, State> {
           <WebView
             allowFileAccess
             style={styles.webview}
-            source={{ uri: htmlPath }}
+            source={{ uri: htmlPath, headers:this.props.source.headers }}
             mixedContentMode="always"
             scrollEnabled
             height="100vh"
-            headers={this.props.source.headers}
           />
         </View>
       )
